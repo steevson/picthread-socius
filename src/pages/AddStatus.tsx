@@ -1,10 +1,9 @@
-
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/hooks/use-toast";
-import { X, Camera, ImageIcon, ChevronLeft, Edit3, Smile, PlusCircle } from 'lucide-react';
+import { X, Camera, ImageIcon, ChevronLeft, Edit3, Smile } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 
 const AddStatus = () => {
@@ -28,10 +27,9 @@ const AddStatus = () => {
     }
   };
 
-  // For direct picsum image selection (as a fallback)
   const handleDirectImageSelect = () => {
     const randomId = Math.floor(Math.random() * 1000);
-    setSelectedImage(`https://picsum.photos/800?random=${randomId}`);
+    setSelectedImage(`https://picsum.photos/200/300?random=${randomId}`);
   };
 
   const handleSubmit = () => {

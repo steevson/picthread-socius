@@ -10,105 +10,105 @@ const STORIES = [
   { 
     id: 1, 
     username: 'Your story', 
-    image: 'https://picsum.photos/300/600?random=101', 
+    image: 'https://picsum.photos/200', 
     isAddNew: true 
   },
   { 
     id: 2, 
     username: 'emma_wilson', 
-    image: 'https://picsum.photos/300/600?random=2',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=2', timeAgo: '2h ago' },
-      { id: 2, image: 'https://picsum.photos/300/600?random=22', timeAgo: '1h ago' },
-      { id: 3, image: 'https://picsum.photos/300/600?random=23', timeAgo: '30m ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=2', timeAgo: '2h ago' },
+      { id: 2, image: 'https://picsum.photos/200/300?random=22', timeAgo: '1h ago' },
+      { id: 3, image: 'https://picsum.photos/200/300?random=23', timeAgo: '30m ago' }
     ]
   },
   { 
     id: 3, 
     username: 'john.doe', 
-    image: 'https://picsum.photos/300/600?random=3',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=3', timeAgo: '4h ago' },
-      { id: 2, image: 'https://picsum.photos/300/600?random=33', timeAgo: '2h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=3', timeAgo: '4h ago' },
+      { id: 2, image: 'https://picsum.photos/200/300?random=33', timeAgo: '2h ago' }
     ]
   },
   { 
     id: 4, 
     username: 'sarah_95', 
-    image: 'https://picsum.photos/300/600?random=4', 
+    image: 'https://picsum.photos/200', 
     seen: true,
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=4', timeAgo: '8h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=4', timeAgo: '8h ago' }
     ]
   },
   { 
     id: 5, 
     username: 'alex_design', 
-    image: 'https://picsum.photos/300/600?random=5',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=5', timeAgo: '3h ago' },
-      { id: 2, image: 'https://picsum.photos/300/600?random=55', timeAgo: '1h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=5', timeAgo: '3h ago' },
+      { id: 2, image: 'https://picsum.photos/200/300?random=55', timeAgo: '1h ago' }
     ]
   },
   { 
     id: 6, 
     username: 'maria.j', 
-    image: 'https://picsum.photos/300/600?random=6',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=6', timeAgo: '5h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=6', timeAgo: '5h ago' }
     ]
   },
   { 
     id: 7, 
     username: 'thomas_k', 
-    image: 'https://picsum.photos/300/600?random=7',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=7', timeAgo: '7h ago' },
-      { id: 2, image: 'https://picsum.photos/300/600?random=77', timeAgo: '4h ago' },
-      { id: 3, image: 'https://picsum.photos/300/600?random=78', timeAgo: '1h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=7', timeAgo: '7h ago' },
+      { id: 2, image: 'https://picsum.photos/200/300?random=77', timeAgo: '4h ago' },
+      { id: 3, image: 'https://picsum.photos/200/300?random=78', timeAgo: '1h ago' }
     ]
   },
   { 
     id: 8, 
     username: 'lisa.ann', 
-    image: 'https://picsum.photos/300/600?random=8', 
+    image: 'https://picsum.photos/200', 
     seen: true,
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=8', timeAgo: '9h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=8', timeAgo: '9h ago' }
     ]
   },
   { 
     id: 9, 
     username: 'mike_sports', 
-    image: 'https://picsum.photos/300/600?random=9',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=9', timeAgo: '2h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=9', timeAgo: '2h ago' }
     ]
   },
   { 
     id: 10, 
     username: 'jessica_t', 
-    image: 'https://picsum.photos/300/600?random=10',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=10', timeAgo: '3h ago' },
-      { id: 2, image: 'https://picsum.photos/300/600?random=110', timeAgo: '1h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=10', timeAgo: '3h ago' },
+      { id: 2, image: 'https://picsum.photos/200/300?random=110', timeAgo: '1h ago' }
     ]
   },
   { 
     id: 11, 
     username: 'david.music', 
-    image: 'https://picsum.photos/300/600?random=11',
+    image: 'https://picsum.photos/200',
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=11', timeAgo: '6h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=11', timeAgo: '6h ago' }
     ]
   },
   { 
     id: 12, 
     username: 'rachel_f', 
-    image: 'https://picsum.photos/300/600?random=12', 
+    image: 'https://picsum.photos/200', 
     seen: true,
     stories: [
-      { id: 1, image: 'https://picsum.photos/300/600?random=12', timeAgo: '10h ago' }
+      { id: 1, image: 'https://picsum.photos/200/300?random=12', timeAgo: '10h ago' }
     ]
   },
 ];
