@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bell, Camera, Home, Menu, MessageSquare, Plus, Search, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import NotificationPanel from './NotificationPanel';
@@ -8,13 +9,16 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <h1 className="text-xl font-bold tracking-tight">InstaClone</h1>
+          <Link to="/">
+            <h1 className="text-xl font-bold tracking-tight">InstaClone</h1>
+          </Link>
         </div>
 
         {/* Search - Hide on mobile */}
@@ -31,17 +35,17 @@ const Navbar = () => {
 
         {/* Navigation */}
         <nav className="flex items-center space-x-1 md:space-x-2">
-          <button className="p-2 rounded-full hover:bg-secondary transition-smooth">
+          <Link to="/" className="p-2 rounded-full hover:bg-secondary transition-smooth">
             <Home className="h-5 w-5" />
-          </button>
+          </Link>
           
           <button className="p-2 rounded-full hover:bg-secondary transition-smooth">
             <MessageSquare className="h-5 w-5" />
           </button>
           
-          <button className="p-2 rounded-full hover:bg-secondary transition-smooth">
+          <Link to="/add-post" className="p-2 rounded-full hover:bg-secondary transition-smooth">
             <Plus className="h-5 w-5" />
-          </button>
+          </Link>
           
           <button className="p-2 rounded-full hover:bg-secondary transition-smooth">
             <Camera className="h-5 w-5" />

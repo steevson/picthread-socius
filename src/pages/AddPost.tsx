@@ -26,6 +26,12 @@ const AddPost = () => {
     }
   };
 
+  // For direct picsum image selection (as a fallback)
+  const handleDirectImageSelect = () => {
+    const randomId = Math.floor(Math.random() * 1000);
+    setSelectedImage(`https://picsum.photos/800?random=${randomId}`);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedImage) {
@@ -92,12 +98,23 @@ const AddPost = () => {
                     onChange={handleImageSelect}
                     className="hidden"
                   />
-                  <label htmlFor="image-upload">
-                    <Button type="button" variant="outline" size="sm">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Upload Image
+                  <div className="flex gap-2">
+                    <label htmlFor="image-upload">
+                      <Button type="button" variant="outline" size="sm">
+                        <Upload className="h-4 w-4 mr-2" />
+                        Upload Image
+                      </Button>
+                    </label>
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleDirectImageSelect}
+                    >
+                      <ImageIcon className="h-4 w-4 mr-2" />
+                      Use Random Image
                     </Button>
-                  </label>
+                  </div>
                 </div>
               </div>
             )}

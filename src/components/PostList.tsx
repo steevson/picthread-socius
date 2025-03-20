@@ -7,8 +7,8 @@ const POSTS = [
   {
     id: 1,
     username: 'alex_design',
-    userImage: 'https://source.unsplash.com/random/300x300/?portrait&sig=5',
-    image: 'https://source.unsplash.com/random/1080x1080/?travel&sig=1',
+    userImage: 'https://picsum.photos/200?random=10',
+    image: 'https://picsum.photos/800?random=1',
     caption: 'Amazing sunset at the beach today! 🌅 #travel #sunset #beach',
     likes: 543,
     comments: 32,
@@ -17,8 +17,8 @@ const POSTS = [
   {
     id: 2,
     username: 'john.doe',
-    userImage: 'https://source.unsplash.com/random/300x300/?portrait&sig=3',
-    image: 'https://source.unsplash.com/random/1080x1080/?food&sig=2',
+    userImage: 'https://picsum.photos/200?random=20',
+    image: 'https://picsum.photos/800?random=2',
     caption: 'Homemade pasta for dinner tonight! Recipe in bio.',
     likes: 289,
     comments: 14,
@@ -27,8 +27,8 @@ const POSTS = [
   {
     id: 3,
     username: 'emma_wilson',
-    userImage: 'https://source.unsplash.com/random/300x300/?portrait&sig=2',
-    image: 'https://source.unsplash.com/random/1080x1080/?nature&sig=3',
+    userImage: 'https://picsum.photos/200?random=30',
+    image: 'https://picsum.photos/800?random=3',
     caption: 'Morning hike through the mountains. Nature always heals.',
     likes: 892,
     comments: 57,
@@ -37,8 +37,8 @@ const POSTS = [
   {
     id: 4,
     username: 'maria.j',
-    userImage: 'https://source.unsplash.com/random/300x300/?portrait&sig=6',
-    image: 'https://source.unsplash.com/random/1080x1080/?city&sig=4',
+    userImage: 'https://picsum.photos/200?random=40',
+    image: 'https://picsum.photos/800?random=4',
     caption: 'City lights and city nights. Downtown adventures.',
     likes: 1243,
     comments: 86,

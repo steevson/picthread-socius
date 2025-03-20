@@ -91,9 +91,9 @@ const Post = ({ id, username, userImage, image, caption, likes, comments, timeAg
 
   // Sample comments data
   const sampleComments = [
-    { id: 1, username: 'johndoe', avatar: 'https://source.unsplash.com/random/300x300/?portrait&sig=20', text: 'Amazing shot! 📸', timeAgo: '15m' },
-    { id: 2, username: 'sarahjane', avatar: 'https://source.unsplash.com/random/300x300/?portrait&sig=21', text: 'Love the colors in this!', timeAgo: '45m' },
-    { id: 3, username: 'mikebrown', avatar: 'https://source.unsplash.com/random/300x300/?portrait&sig=22', text: 'Where was this taken?', timeAgo: '1h' },
+    { id: 1, username: 'johndoe', avatar: 'https://picsum.photos/200?random=1', text: 'Amazing shot! 📸', timeAgo: '15m' },
+    { id: 2, username: 'sarahjane', avatar: 'https://picsum.photos/200?random=2', text: 'Love the colors in this!', timeAgo: '45m' },
+    { id: 3, username: 'mikebrown', avatar: 'https://picsum.photos/200?random=3', text: 'Where was this taken?', timeAgo: '1h' },
   ];
 
   return (
@@ -152,7 +152,10 @@ const Post = ({ id, username, userImage, image, caption, likes, comments, timeAg
               onClick={handleLike}
             >
               <Heart 
-                className={cn("h-6 w-6 transition-smooth", liked && "fill-red-500 text-red-500 like-animation")} 
+                className={cn(
+                  "h-6 w-6 transition-smooth", 
+                  liked ? "fill-red-500 text-red-500 like-animation" : ""
+                )} 
               />
             </button>
             <button 
@@ -173,7 +176,10 @@ const Post = ({ id, username, userImage, image, caption, likes, comments, timeAg
             onClick={handleSave}
           >
             <Bookmark 
-              className={cn("h-6 w-6 transition-smooth", saved && "fill-current")} 
+              className={cn(
+                "h-6 w-6 transition-smooth", 
+                saved ? "fill-current" : ""
+              )} 
             />
           </button>
         </div>

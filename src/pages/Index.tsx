@@ -18,7 +18,7 @@ const Index = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="w-14 h-14 rounded-full overflow-hidden">
                 <img 
-                  src="https://source.unsplash.com/random/300x300/?portrait&sig=1" 
+                  src="https://picsum.photos/200?random=profile" 
                   alt="Your profile" 
                   className="w-full h-full object-cover"
                 />
@@ -41,7 +41,7 @@ const Index = () => {
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 rounded-full overflow-hidden">
                         <img 
-                          src={`https://source.unsplash.com/random/300x300/?portrait&sig=${i + 20}`} 
+                          src={`https://picsum.photos/200?random=${i + 50}`} 
                           alt="Suggested user" 
                           className="w-full h-full object-cover"
                           loading="lazy"
