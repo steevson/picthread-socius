@@ -1,7 +1,9 @@
 
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Story from './Story';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 // Sample data
 const STORIES = [
@@ -21,6 +23,8 @@ const STORIES = [
 
 const StoryList = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -31,6 +35,21 @@ const StoryList = () => {
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: 240, behavior: 'smooth' });
+    }
+  };
+
+  const handleAddNewStory = () => {
+    navigate('/add-post');
+    toast({
+      title: "Create a post",
+      description: "Share a photo with your followers",
+      duration: 2000,
+    });
+  };
+
+  const handleStoryClick = (id: number, username: string) => {
+    if (id !== 1) { // Not the "Add new" story
+      console.log(`Viewing ${username}'s story`);
     }
   };
 
@@ -47,7 +66,7 @@ const StoryList = () => {
             image={story.image}
             seen={story.seen}
             isAddNew={story.isAddNew}
-            onClick={() => console.log(`Story ${story.id} clicked`)}
+            onClick={story.isAddNew ? handleAddNewStory : () => handleStoryClick(story.id, story.username)}
           />
         ))}
       </div>
@@ -55,14 +74,14 @@ const StoryList = () => {
       {/* Navigation arrows */}
       <button 
         onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 bg-white/90 rounded-full p-1 shadow-md hover:bg-white transition-smooth hidden md:block"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 bg-white/90 dark:bg-gray-800/90 rounded-full p-1 shadow-md hover:bg-white dark:hover:bg-gray-700 transition-smooth hidden md:block"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
       
       <button 
         onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1 bg-white/90 rounded-full p-1 shadow-md hover:bg-white transition-smooth hidden md:block"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1 bg-white/90 dark:bg-gray-800/90 rounded-full p-1 shadow-md hover:bg-white dark:hover:bg-gray-700 transition-smooth hidden md:block"
       >
         <ChevronRight className="h-4 w-4" />
       </button>
