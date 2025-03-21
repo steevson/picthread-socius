@@ -5,13 +5,31 @@ import Story from './Story';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
+// Define the StoryItem interface
+interface StoryItem {
+  id: number;
+  image: string;
+  timeAgo: string;
+}
+
+// Define the Story interface
+interface StoryData {
+  id: number;
+  username: string;
+  image: string;
+  isAddNew?: boolean;
+  seen?: boolean;
+  stories?: StoryItem[];
+}
+
 // Sample data with multiple status items per user
-const STORIES = [
+const STORIES: StoryData[] = [
   { 
     id: 1, 
     username: 'Your story', 
     image: 'https://picsum.photos/200', 
-    isAddNew: true 
+    isAddNew: true,
+    stories: [] // Add an empty stories array to fix the TypeScript error
   },
   { 
     id: 2, 
@@ -147,8 +165,10 @@ const StoryList = () => {
     }
   };
 
-  // Filter out the "Your story" for the all stories navigation
-  const storiesForNavigation = STORIES.filter(story => !story.isAddNew);
+  // Filter out the "Your story" and make sure all stories have required properties
+  const storiesForNavigation = STORIES.filter(story => 
+    !story.isAddNew && story.stories && story.stories.length > 0
+  );
 
   return (
     <div className="relative w-full my-4">
@@ -164,7 +184,7 @@ const StoryList = () => {
             seen={story.seen}
             isAddNew={story.isAddNew}
             onClick={story.isAddNew ? handleAddNewStory : () => handleStoryClick(story.id, story.username, index)}
-            stories={story.stories}
+            stories={story.stories || []}
             allStories={storiesForNavigation}
             storyUserIndex={activeUserIndex}
             onUserChange={setActiveUserIndex}
