@@ -11,14 +11,21 @@ interface StoryItem {
   timeAgo: string;
 }
 
+interface StoryWithRequiredStories {
+  id: number;
+  username: string;
+  image: string;
+  stories: StoryItem[];
+}
+
 interface StoryProps {
   image: string;
   username: string;
   seen?: boolean;
   isAddNew?: boolean;
   onClick?: () => void;
-  stories?: StoryItem[];
-  allStories?: { id: number; username: string; image: string; stories: StoryItem[] }[];
+  stories: StoryItem[]; // Required stories array (even if empty)
+  allStories?: StoryWithRequiredStories[];
   storyUserIndex?: number;
   onUserChange?: (index: number) => void;
 }

@@ -22,6 +22,14 @@ interface StoryData {
   stories?: StoryItem[];
 }
 
+// Interface for the Story component's expected structure
+interface StoryWithRequiredStories {
+  id: number;
+  username: string;
+  image: string;
+  stories: StoryItem[];
+}
+
 // Sample data with multiple status items per user
 const STORIES: StoryData[] = [
   { 
@@ -159,15 +167,16 @@ const StoryList = () => {
   };
 
   const handleStoryClick = (id: number, username: string, index: number) => {
-    if (id !== 1) { // Not the "Add new" story
+    if (id !== 1) { // Not the "Your story" story
       console.log(`Viewing ${username}'s story`);
       setActiveUserIndex(index - 1); // -1 because we skip the "Your story" item
     }
   };
 
   // Filter out the "Your story" and make sure all stories have required properties
-  const storiesForNavigation = STORIES.filter(story => 
-    !story.isAddNew && story.stories && story.stories.length > 0
+  const storiesForNavigation: StoryWithRequiredStories[] = STORIES.filter(
+    (story): story is StoryWithRequiredStories => 
+      !story.isAddNew && !!story.stories && story.stories.length > 0
   );
 
   return (
