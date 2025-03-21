@@ -173,6 +173,16 @@ const StoryList = () => {
     }
   };
 
+  // Handle following a user
+  const handleFollow = (e: React.MouseEvent, username: string) => {
+    e.stopPropagation(); // Prevent opening the story
+    toast({
+      title: "Followed",
+      description: `You are now following ${username}`,
+      duration: 2000,
+    });
+  };
+
   // Filter out the "Your story" and make sure all stories have required properties
   const storiesForNavigation: StoryWithRequiredStories[] = STORIES.filter(
     (story): story is StoryWithRequiredStories => 
