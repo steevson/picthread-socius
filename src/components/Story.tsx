@@ -70,9 +70,11 @@ const Story = ({
       setCurrentStoryIndex(prev => prev + 1);
       startStoryProgress();
     } else {
-      // If we're at the last story of the current user, go to the next user
+      // Auto-advance to next user when reaching the end of current user's stories
       if (allStories.length > 0 && onUserChange && storyUserIndex < allStories.length - 1) {
         onUserChange(storyUserIndex + 1);
+        setCurrentStoryIndex(0); // Reset to first story of next user
+        startStoryProgress();
       } else {
         setStoryOpen(false);
       }
@@ -96,19 +98,7 @@ const Story = ({
     }
   };
 
-  const nextUser = () => {
-    if (allStories.length > 0 && onUserChange && storyUserIndex < allStories.length - 1) {
-      onUserChange(storyUserIndex + 1);
-    } else {
-      setStoryOpen(false);
-    }
-  };
-
-  const prevUser = () => {
-    if (allStories.length > 0 && onUserChange && storyUserIndex > 0) {
-      onUserChange(storyUserIndex - 1);
-    }
-  };
+  // Removed nextUser and prevUser functions as they're redundant with auto-advance
 
   React.useEffect(() => {
     if (!storyOpen || !isPlaying) return;
@@ -228,27 +218,7 @@ const Story = ({
               <ChevronRight className="h-5 w-5" />
             </button>
             
-            {/* User navigation buttons */}
-            {allStories.length > 0 && (
-              <>
-                <button 
-                  onClick={prevUser}
-                  className="absolute left-2 bottom-4 bg-white/20 rounded-full px-3 py-1 text-white text-xs"
-                  style={{ display: storyUserIndex === 0 ? 'none' : 'block' }}
-                >
-                  <ChevronLeft className="h-4 w-4 inline mr-1" />
-                  Prev User
-                </button>
-                <button 
-                  onClick={nextUser}
-                  className="absolute right-2 bottom-4 bg-white/20 rounded-full px-3 py-1 text-white text-xs"
-                  style={{ display: storyUserIndex >= allStories.length - 1 ? 'none' : 'block' }}
-                >
-                  Next User
-                  <ChevronRight className="h-4 w-4 inline ml-1" />
-                </button>
-              </>
-            )}
+            {/* Removed duplicate user navigation buttons */}
             
             {/* Left/Right click areas for navigation (just the middle part) */}
             <div 

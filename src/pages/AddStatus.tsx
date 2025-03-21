@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from "@/hooks/use-toast";
 import { X, Camera, ImageIcon, ChevronLeft, Edit3, Smile } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const AddStatus = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -16,6 +16,12 @@ const AddStatus = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const emojis = [
+    '😊', '😂', '🥰', '😍', '😎', '😢', '😭', '🥳', '🤔', '😴',
+    '👍', '👎', '❤️', '🔥', '⭐', '🎉', '🙏', '👋', '🤝', '✌️',
+    '🌈', '🌙', '☀️', '🌟', '🍕', '🍔', '🍦', '🍷', '🎵', '🎮'
+  ];
 
   const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -40,16 +46,14 @@ const AddStatus = () => {
   };
 
   const handleTextEdit = () => {
-    // Focus on the text input
     const textInput = document.getElementById('status-text-input');
     if (textInput) {
       textInput.focus();
     }
   };
 
-  const handleEmoji = () => {
-    // Simple emoji insertion
-    setText(prev => prev + ' 😊');
+  const handleEmoji = (emoji: string) => {
+    setText(prev => prev + emoji);
   };
 
   const handleSubmit = () => {
@@ -64,7 +68,6 @@ const AddStatus = () => {
 
     setIsLoading(true);
     
-    // Simulate upload progress
     let currentProgress = 0;
     const interval = setInterval(() => {
       currentProgress += 10;
@@ -92,7 +95,6 @@ const AddStatus = () => {
   return (
     <Layout className="max-w-md mx-auto">
       <div className="relative h-screen bg-background flex flex-col">
-        {/* Header */}
         <div className="p-4 flex items-center justify-between border-b border-border">
           <Button 
             variant="ghost" 
@@ -112,7 +114,6 @@ const AddStatus = () => {
           </Button>
         </div>
 
-        {/* Status creation area */}
         <div 
           className="flex-1 flex flex-col justify-center items-center p-4" 
           style={{ backgroundColor: bgColor }}
@@ -190,20 +191,35 @@ const AddStatus = () => {
                 >
                   <Edit3 className="h-5 w-5 text-white" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="rounded-full bg-white/20 border-none hover:bg-white/30"
-                  onClick={handleEmoji}
-                >
-                  <Smile className="h-5 w-5 text-white" />
-                </Button>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      className="rounded-full bg-white/20 border-none hover:bg-white/30"
+                    >
+                      <Smile className="h-5 w-5 text-white" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-64 p-2">
+                    <div className="grid grid-cols-6 gap-2">
+                      {emojis.map((emoji, index) => (
+                        <button
+                          key={index}
+                          className="text-xl h-10 w-10 flex items-center justify-center hover:bg-muted rounded-md transition-colors"
+                          onClick={() => handleEmoji(emoji)}
+                        >
+                          {emoji}
+                        </button>
+                      ))}
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
           )}
         </div>
 
-        {/* Color options */}
         <div className="p-4 flex justify-center space-x-3 border-t border-border">
           {colorOptions.map((color) => (
             <button

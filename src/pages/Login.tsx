@@ -36,7 +36,9 @@ const Login: React.FC = () => {
     try {
       // Simulating API call for now
       setTimeout(() => {
-        // For demo purposes, always succeed
+        // For demo purposes, always succeed and set auth
+        localStorage.setItem('user', JSON.stringify({ email: formData.email }));
+        
         toast({
           title: "Login successful",
           description: "Welcome back!",
@@ -63,7 +65,10 @@ const Login: React.FC = () => {
         return;
       }
 
-      // If login successful, redirect to home
+      // Set auth state if login successful
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Redirect to home
       navigate('/');
       */
     } catch (error) {

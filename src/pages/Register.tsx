@@ -52,7 +52,13 @@ const Register: React.FC = () => {
     try {
       // Simulating API call for now
       setTimeout(() => {
-        // For demo purposes, always succeed
+        // For demo purposes, always succeed and set auth
+        localStorage.setItem('user', JSON.stringify({ 
+          email: formData.email,
+          username: formData.username,
+          fullName: formData.fullName
+        }));
+        
         toast({
           title: "Registration successful",
           description: "Your account has been created.",
@@ -87,7 +93,10 @@ const Register: React.FC = () => {
         return;
       }
 
-      // If registration successful, redirect to home
+      // Set auth state if registration successful
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Redirect to home
       navigate('/');
       */
     } catch (error) {
