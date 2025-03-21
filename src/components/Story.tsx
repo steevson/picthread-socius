@@ -98,8 +98,6 @@ const Story = ({
     }
   };
 
-  // Removed nextUser and prevUser functions as they're redundant with auto-advance
-
   React.useEffect(() => {
     if (!storyOpen || !isPlaying) return;
     
@@ -217,8 +215,6 @@ const Story = ({
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-            
-            {/* Removed duplicate user navigation buttons */}
             
             {/* Left/Right click areas for navigation (just the middle part) */}
             <div 
