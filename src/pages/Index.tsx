@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 import StoryList from '@/components/StoryList';
 import PostList from '@/components/PostList';
 import { Button } from '@/components/ui/button';
-import { Tag } from 'lucide-react';
+import { Tag, LogIn, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
@@ -32,6 +32,26 @@ const Index = () => {
                 <p className="font-medium">your_username</p>
                 <p className="text-sm text-muted-foreground">Your Name</p>
               </div>
+            </div>
+            
+            <div className="flex space-x-2 mb-6">
+              <Button 
+                variant="outline" 
+                className="flex-1 flex justify-center items-center gap-2"
+                onClick={() => navigate('/login')}
+              >
+                <LogIn className="h-4 w-4" />
+                <span>Log in</span>
+              </Button>
+              
+              <Button 
+                variant="default" 
+                className="flex-1 flex justify-center items-center gap-2"
+                onClick={() => navigate('/register')}
+              >
+                <UserPlus className="h-4 w-4" />
+                <span>Sign up</span>
+              </Button>
             </div>
             
             <Button 
