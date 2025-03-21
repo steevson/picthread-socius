@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ const AddPost = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [caption, setCaption] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -30,6 +31,10 @@ const AddPost = () => {
   const handleDirectImageSelect = () => {
     const randomId = Math.floor(Math.random() * 1000);
     setSelectedImage(`https://picsum.photos/800?random=${randomId}`);
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -94,17 +99,16 @@ const AddPost = () => {
                   <Input
                     type="file"
                     id="image-upload"
+                    ref={fileInputRef}
                     accept="image/*"
                     onChange={handleImageSelect}
                     className="hidden"
                   />
                   <div className="flex gap-2">
-                    <label htmlFor="image-upload">
-                      <Button type="button" variant="outline" size="sm">
-                        <Upload className="h-4 w-4 mr-2" />
-                        Upload Image
-                      </Button>
-                    </label>
+                    <Button type="button" variant="outline" size="sm" onClick={triggerFileInput}>
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload Image
+                    </Button>
                     <Button 
                       type="button" 
                       variant="outline" 

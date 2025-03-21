@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Story from './Story';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -117,6 +117,7 @@ const StoryList = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [activeUserIndex, setActiveUserIndex] = useState(0);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -139,11 +140,15 @@ const StoryList = () => {
     });
   };
 
-  const handleStoryClick = (id: number, username: string) => {
+  const handleStoryClick = (id: number, username: string, index: number) => {
     if (id !== 1) { // Not the "Add new" story
       console.log(`Viewing ${username}'s story`);
+      setActiveUserIndex(index - 1); // -1 because we skip the "Your story" item
     }
   };
+
+  // Filter out the "Your story" for the all stories navigation
+  const storiesForNavigation = STORIES.filter(story => !story.isAddNew);
 
   return (
     <div className="relative w-full my-4">
@@ -151,15 +156,18 @@ const StoryList = () => {
         ref={scrollContainerRef}
         className="flex space-x-4 overflow-x-auto py-2 px-1 scroll-hidden"
       >
-        {STORIES.map((story) => (
+        {STORIES.map((story, index) => (
           <Story
             key={story.id}
             username={story.username}
             image={story.image}
             seen={story.seen}
             isAddNew={story.isAddNew}
-            onClick={story.isAddNew ? handleAddNewStory : () => handleStoryClick(story.id, story.username)}
+            onClick={story.isAddNew ? handleAddNewStory : () => handleStoryClick(story.id, story.username, index)}
             stories={story.stories}
+            allStories={storiesForNavigation}
+            storyUserIndex={activeUserIndex}
+            onUserChange={setActiveUserIndex}
           />
         ))}
       </div>

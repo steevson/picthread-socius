@@ -18,6 +18,9 @@ interface StoryProps {
   isAddNew?: boolean;
   onClick?: () => void;
   stories?: StoryItem[];
+  allStories?: { id: number; username: string; image: string; stories: StoryItem[] }[];
+  storyUserIndex?: number;
+  onUserChange?: (index: number) => void;
 }
 
 const Story = ({ 
@@ -26,7 +29,10 @@ const Story = ({
   seen = false, 
   isAddNew = false, 
   onClick,
-  stories = [{ id: 1, image, timeAgo: 'now' }] 
+  stories = [{ id: 1, image, timeAgo: 'now' }],
+  allStories = [],
+  storyUserIndex = 0,
+  onUserChange
 }: StoryProps) => {
   const [storyOpen, setStoryOpen] = useState(false);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
@@ -57,7 +63,12 @@ const Story = ({
       setCurrentStoryIndex(prev => prev + 1);
       startStoryProgress();
     } else {
-      setStoryOpen(false);
+      // If we're at the last story of the current user, go to the next user
+      if (allStories.length > 0 && onUserChange && storyUserIndex < allStories.length - 1) {
+        onUserChange(storyUserIndex + 1);
+      } else {
+        setStoryOpen(false);
+      }
     }
   };
 
@@ -65,6 +76,30 @@ const Story = ({
     if (currentStoryIndex > 0) {
       setCurrentStoryIndex(prev => prev - 1);
       startStoryProgress();
+    } else {
+      // If we're at the first story of the current user, go to the previous user
+      if (allStories.length > 0 && onUserChange && storyUserIndex > 0) {
+        const prevUserStories = allStories[storyUserIndex - 1].stories;
+        onUserChange(storyUserIndex - 1);
+        // Set to the last story of the previous user
+        setTimeout(() => {
+          setCurrentStoryIndex(prevUserStories.length - 1);
+        }, 50);
+      }
+    }
+  };
+
+  const nextUser = () => {
+    if (allStories.length > 0 && onUserChange && storyUserIndex < allStories.length - 1) {
+      onUserChange(storyUserIndex + 1);
+    } else {
+      setStoryOpen(false);
+    }
+  };
+
+  const prevUser = () => {
+    if (allStories.length > 0 && onUserChange && storyUserIndex > 0) {
+      onUserChange(storyUserIndex - 1);
     }
   };
 
@@ -171,11 +206,11 @@ const Story = ({
               />
             </div>
             
-            {/* Navigation buttons */}
+            {/* Navigation buttons for stories */}
             <button 
               onClick={prevStory}
               className="absolute left-2 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/30 flex items-center justify-center text-white"
-              style={{ display: currentStoryIndex === 0 ? 'none' : 'flex' }}
+              style={{ display: (currentStoryIndex === 0 && storyUserIndex === 0) ? 'none' : 'flex' }}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -186,13 +221,35 @@ const Story = ({
               <ChevronRight className="h-5 w-5" />
             </button>
             
-            {/* Left/Right click areas for navigation */}
+            {/* User navigation buttons */}
+            {allStories.length > 0 && (
+              <>
+                <button 
+                  onClick={prevUser}
+                  className="absolute left-2 bottom-4 bg-white/20 rounded-full px-3 py-1 text-white text-xs"
+                  style={{ display: storyUserIndex === 0 ? 'none' : 'block' }}
+                >
+                  <ChevronLeft className="h-4 w-4 inline mr-1" />
+                  Prev User
+                </button>
+                <button 
+                  onClick={nextUser}
+                  className="absolute right-2 bottom-4 bg-white/20 rounded-full px-3 py-1 text-white text-xs"
+                  style={{ display: storyUserIndex >= allStories.length - 1 ? 'none' : 'block' }}
+                >
+                  Next User
+                  <ChevronRight className="h-4 w-4 inline ml-1" />
+                </button>
+              </>
+            )}
+            
+            {/* Left/Right click areas for navigation (just the middle part) */}
             <div 
-              className="absolute top-0 left-0 w-1/2 h-full cursor-pointer" 
+              className="absolute top-[30%] left-0 w-1/3 h-[40%] cursor-pointer" 
               onClick={prevStory}
             />
             <div 
-              className="absolute top-0 right-0 w-1/2 h-full cursor-pointer" 
+              className="absolute top-[30%] right-0 w-1/3 h-[40%] cursor-pointer" 
               onClick={nextStory}
             />
           </div>

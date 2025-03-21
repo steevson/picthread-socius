@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
@@ -27,9 +28,28 @@ const AddStatus = () => {
     }
   };
 
+  const handleCameraClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   const handleDirectImageSelect = () => {
     const randomId = Math.floor(Math.random() * 1000);
     setSelectedImage(`https://picsum.photos/200/300?random=${randomId}`);
+  };
+
+  const handleTextEdit = () => {
+    // Focus on the text input
+    const textInput = document.getElementById('status-text-input');
+    if (textInput) {
+      textInput.focus();
+    }
+  };
+
+  const handleEmoji = () => {
+    // Simple emoji insertion
+    setText(prev => prev + ' 😊');
   };
 
   const handleSubmit = () => {
@@ -120,6 +140,7 @@ const AddStatus = () => {
               </button>
               <input 
                 type="text"
+                id="status-text-input"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Type something..."
@@ -130,6 +151,7 @@ const AddStatus = () => {
             <div className="flex flex-col items-center space-y-6 text-white">
               <input
                 type="text"
+                id="status-text-input"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Type something..."
@@ -137,14 +159,6 @@ const AddStatus = () => {
                 style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}
               />
               <div className="flex gap-3">
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="rounded-full bg-white/20 border-none hover:bg-white/30"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <Camera className="h-5 w-5 text-white" />
-                </Button>
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -152,6 +166,14 @@ const AddStatus = () => {
                   onChange={handleImageSelect}
                   className="hidden"
                 />
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="rounded-full bg-white/20 border-none hover:bg-white/30"
+                  onClick={handleCameraClick}
+                >
+                  <Camera className="h-5 w-5 text-white" />
+                </Button>
                 <Button 
                   variant="outline" 
                   size="icon" 
@@ -164,6 +186,7 @@ const AddStatus = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full bg-white/20 border-none hover:bg-white/30"
+                  onClick={handleTextEdit}
                 >
                   <Edit3 className="h-5 w-5 text-white" />
                 </Button>
@@ -171,6 +194,7 @@ const AddStatus = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full bg-white/20 border-none hover:bg-white/30"
+                  onClick={handleEmoji}
                 >
                   <Smile className="h-5 w-5 text-white" />
                 </Button>
